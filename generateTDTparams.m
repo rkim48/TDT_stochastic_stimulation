@@ -45,14 +45,16 @@ current = row.currents;
 period = 1; % ms
 
 % Create params array to store parameters for single trial 
-paramsArr = nan(nROWS,20);
+paramsArr = nan(nROWS,24);
 periodColIdx = find(contains(columnNames,'Period')==1);
+countColIdx = find(contains(columnNames,'Count')==1);
 ampColIdx = find(contains(columnNames,'Amp')==1);
 durColIdx = find(contains(columnNames,'Dur')==1);
 delayColIdx = find(contains(columnNames,'Delay')==1);
 chColIdx = find(contains(columnNames,'Chan')==1);
 
 paramsArr(:,periodColIdx) = period * ones(nROWS,4);
+paramsArr(:,countColIdx) = 1 * ones(nROWS,4);
 paramsArr(:,ampColIdx) = current * ones(nROWS,4);
 paramsArr(:,durColIdx) = pulseDuration * ones(nROWS,4);
 paramsArr(:,delayColIdx) = tsColumns;
