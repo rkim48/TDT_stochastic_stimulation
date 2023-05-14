@@ -64,7 +64,7 @@ paramsArr(:,chColIdx) = chColumns;
 
 paramTable = array2table(paramsArr,'RowNames',string(1:nROWS));
 paramTable.Properties.VariableNames = string(columnNames);
-writetable(paramTable,'paramArray.csv','WriteRowNames',true);
+writetable(paramTable,'paramArray.par.csv','WriteRowNames',true);
 
 %% Helper functions
 
