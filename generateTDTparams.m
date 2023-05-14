@@ -71,12 +71,12 @@ function stim_ts = generateStimTimes(stimRate,minISI,trialLength)
 % 1/stimRate or mu is mean of exponential distribution underlying ISIs
 % min ISI (s) is the minimum ISI that can occur (arises from refractory period
 % of neurons) 
-% window (s) defines the max stimulation timestamp such that stim_ts occurs
-% in interval [0, window) 
+% trialLength (s) defines the max stimulation timestamp such that stim_ts occurs
+% in interval [0, trialLength) 
 mu = 1/stimRate;
 ISIs = max(minISI,exprnd(mu,1,500)); % min ISI 
 stim_ts = cumsum(ISIs);
-stim_ts = stim_ts(stim_ts < trialLength); % get spikes before window 
+stim_ts = stim_ts(stim_ts < trialLength); % get spikes before trialLength 
 end
 
 function plotStimTimes(arr)
