@@ -76,14 +76,14 @@ function stim_ts = generateStimTimes(stimRate,minISI,trialLength)
 mu = 1/stimRate;
 ISIs = max(minISI,exprnd(mu,1,500)); % min ISI 
 stim_ts = cumsum(ISIs);
-stim_ts = stim_ts(stim_ts < trialLength); % get spikes before trialLength 
+stim_ts = stim_ts(stim_ts < trialLength); % get stim before trialLength 
 end
 
 function plotStimTimes(arr)
 
 for i = 1:size(arr,1)
-    ch_spikes = arr{i};
-    scatter(ch_spikes,i*ones(1,numel(ch_spikes)),'k','Marker','|');
+    ch_stim = arr{i};
+    scatter(ch_stim,i*ones(1,numel(ch_stim)),'k','Marker','|');
     hold on;
 end
 ylim([0.5 32.5])
