@@ -4,8 +4,8 @@ load('columnNames.mat','columnNames');
 % Create params array to store parameters for single trial 
 nROWS = 2;
 current = 1;
-period = 400;
-pulseDuration = 400;
+period = 0.4;
+pulseDuration = 0.4;
 tsColumns = [0 0.2 0.4 0.6; 0 0.2 0.4 0.6]; % delays
 chColumns = [1 2 3 4; 1 2 3 4];
 
@@ -36,7 +36,7 @@ seq = [1 2 1 2]';
 time = [1000 2000 3000 4000]';
 seqArr = [seq time];
 columnNames = ["Seq-1" "Time-1"];
-paramTable = array2table(seqArr,'RowNames',string(1:nSEQ));
+paramTable = array2table(seqArr);
 paramTable.Properties.VariableNames = string(columnNames);
-writetable(paramTable,'test.seq.csv','WriteRowNames',true);
+writetable(paramTable,'test.seq.csv');
 
