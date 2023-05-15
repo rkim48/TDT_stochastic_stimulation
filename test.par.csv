@@ -1,0 +1,3 @@
+Row,PeriodA (ms),CountA,AmpA (uA),DurA (ms),DelayA (ms),ChanA,PeriodB_ms_,CountB,AmpB_uA_,DurB_ms_,DelayB_ms_,ChanB,PeriodC_ms_,CountC,AmpC_uA_,DurC_ms_,DelayC_ms_,ChanC,PeriodD_ms_,CountD,AmpD_uA_,DurD_ms_,DelayD_ms_,ChanD
+1,400,1,1,400,0,1,400,1,1,400,0.2,2,400,1,1,400,0.4,3,400,1,1,400,0.6,4
+2,400,1,1,400,0,1,400,1,1,400,0.2,2,400,1,1,400,0.4,3,400,1,1,400,0.6,4
