@@ -2,11 +2,11 @@
 
 load('columnNames.mat','columnNames');
 % Create params array to store parameters for single trial 
-nROWS = 2;
+nROWS = 8;
 current = 1;
 period = 0.4;
-pulseDuration = 0.4;
-tsColumns = [0 200 400 600; 0 20 0.4 0.6]; % delays
+pulseDurations = 80:40:400;
+tsColumns = [0 200 400 600; 0 200 400 600]; % delays
 chColumns = [1 2 3 4; 1 2 3 4];
 
 paramsArr = nan(nROWS,24);
@@ -20,7 +20,7 @@ chColIdx = find(contains(columnNames,'Chan')==1);
 paramsArr(:,periodColIdx) = period * ones(nROWS,4);
 paramsArr(:,countColIdx) = 1 * ones(nROWS,4);
 paramsArr(:,ampColIdx) = current * ones(nROWS,4);
-paramsArr(:,durColIdx) = pulseDuration * ones(nROWS,4);
+paramsArr(:,durColIdx) = repmat(pulseDurations,1,nROWS,[])
 paramsArr(:,delayColIdx) = tsColumns;
 paramsArr(:,chColIdx) = chColumns;
 
