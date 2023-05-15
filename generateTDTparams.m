@@ -27,7 +27,7 @@ for i = 1:nTRIALS
 end
 
 subplot(1,2,1);
-plotStimTimes(stimTsArr)
+plotStimTimes(stimTsArr,stimRate)
 subplot(1,2,2);
 plotISI(stimTsArr);
 %%
@@ -81,7 +81,7 @@ stim_ts = cumsum(ISIs);
 stim_ts = stim_ts(stim_ts < trialLength); % get stim before trialLength 
 end
 
-function plotStimTimes(arr)
+function plotStimTimes(arr,stimRate)
 
 for i = 1:size(arr,1)
     ch_stim = arr{i};
@@ -94,7 +94,7 @@ set(gca().YAxis,'TickLength',[0 0])
 set(gca().XAxis,'TickLength',[0 0])
 ylabel('Stim channel')
 xlabel('Time (s)')
-title('Example stimulation raster plot')
+title(sprintf('Example stimulation raster plot for lambda = %d',stimRate))
 end
 
 function plotISI(arr)
