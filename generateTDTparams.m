@@ -34,7 +34,7 @@ plotISI(stimTsArr);
 [chVec,tsVec] = transformStimTsArr(stimTsArr);
 
 %%
-[chColumns,tsColumns,nROWS,rowTime] = groupChAndTs(chVec,tsVec);
+[chColumns,tsColumns,nROWS,rowTime] = groupChAndTs(chVec,tsVec*1000);
 
 %% Trial parameters
 trial_idx = 1;
@@ -123,7 +123,6 @@ function [chVec,tsVec] = transformStimTsArr(stimTsArr)
     chVec = [];
     tsVec = [];
     for i = 1:size(stimTsArr,1)
-        % lastRowTs = stimTs{end}
         stimTs = stimTsArr{i};
         tsVec = [tsVec stimTs];
         chVec = [chVec i * ones(1,numel(stimTs))];
