@@ -5,7 +5,7 @@ load('columnNames.mat','columnNames');
 nROWS = 9;
 current = 1;
 period = 0.4;
-pulseDurations = 80:40:400;
+pulseDurations =(80:40:400)/1e3;
 tsColumns = [0 200 400 600]; % delays
 chColumns = [1 2 3 4];
 
