@@ -42,7 +42,7 @@ row = T(trial_idx,:);
 stimRate = row.stimRates;
 pulseDuration = row.pulseDurations;
 current = row.currents;
-period = 1; % ms
+period = 0.5; % ms
 
 % Create params array to store parameters for single trial 
 paramsArr = nan(nROWS,24);
