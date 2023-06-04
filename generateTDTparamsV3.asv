@@ -52,14 +52,6 @@ paramTable = array2table(paramsArr,'RowNames',string(1:nROWS));
 paramTable.Properties.VariableNames = string(columnNames);
 writetable(paramTable,'paramArray.par.csv','WriteRowNames',true);
 
-%% Generate sequence file
-timestamp_convert = [stim_ts(1) ; diff(stim_ts)]*1000;
-columnNames = {'Seq-1','Time-1'};
-seqArr = [(1:nROWS)' timestamp_convert];
-seqTable = array2table(seqArr,'RowNames',string(1:nROWS));
-seqTable.Properties.VariableNames = string(columnNames);
-writetable(seqTable,'paramArray.seq.csv','WriteRowNames',true);
-
 %% Plot trial 
 
 plotTrial(stim_ts,stim_ch)
@@ -92,12 +84,12 @@ function plotTrial(stim_ts,stim_ch)
     nSTIM = size(stim_ch,1);
     for i = 1:nSTIM
         stim_time = stim_ts(i);
-        ch_stim = stim_ch{i};
+        ch_stim = stim_ch(i);
         nCH = numel(ch_stim);
-        scatter(repmat(stim_time,1,nCH),ch_stim,'k','Marker','|','LineWidth',1);
+        scatter(repmat(stim_time,1,nCH),ch_stim,'k','Marker','|');
         hold on;
     end
-    ylim([0.5 32.5])
+    lim([0.5 32.5])
     set(gca, 'YDir','reverse')
     set(gca().YAxis,'TickLength',[0 0])
     set(gca().XAxis,'TickLength',[0 0])
