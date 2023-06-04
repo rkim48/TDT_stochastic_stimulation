@@ -1,3 +1,0 @@
-,PeriodA (ms),CountA,AmpA (uA),DurA (ms),DelayA (ms),ChanA,PeriodB (ms),CountB,AmpB (uA),DurB (ms),DelayB (ms),ChanB,PeriodC (ms),CountC,AmpC (uA),DurC (ms),DelayC (ms),ChanC,PeriodD (ms),CountD,AmpD (uA),DurD (ms),DelayD (ms),ChanD
-1,0.4,1,1,0.4,0,1,0.4,,1,0.4,0,3,0.4,,1,0.4,0,4,0.4,,1,0.4,0,5
-2,0.4,,1,0.4,0,1,0.4,,1,0.4,0,6,0.4,,1,0.4,0,32,0.4,,1,0.4,0,31
