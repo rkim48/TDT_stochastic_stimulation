@@ -5,7 +5,7 @@ stimRate = 25;
 minISI = 0.0015;
 multiChStimProb = [0.22 0.26 0.3 0.22];
 nTRIALS = 10; % number of stim trials
-goodChannels = 1:10;
+goodChannels = 1:32;
 [stim_ts,stim_ch] = generateStimTimes(stimRate,minISI,nTRIALS,multiChStimProb,goodChannels);
 % [stim_ts,stim_ch] = generateStimTimesGamma(stimRate,scaleParam,minISI,window,multiChStimProb);
 
@@ -23,14 +23,17 @@ xline([0:0.5:10])
 good_channels = 1:32;
 stimRate = 100;
 nTRIALS = 1;
-[stim_ts_arr,stim_ch_arr,~] = generateStimTimes(stimRate,minISI,nTRIALS,multiChStimProb,good_channels);
+[stim_ts_arr,stim_ch_arr,trial_id_arr] = generateStimTimes(stimRate,minISI,nTRIALS,multiChStimProb,good_channels);
 plotTrial(stim_ts_arr,stim_ch_arr)
-%% Experiment 2 - 60 stim trials (1 min duration)
+
+groupedArr = groupStimByTrial(stim_ch_arr,stim_ts_arr,trial_id_arr)
+%% Experiment 2 - 30 stim trials (half min duration)
 stimRate = 50;
-nTRIALS = 60;
-[stim_ts_arr,stim_ch_arr,~] = generateStimTimes(stimRate,minISI,nTRIALS,multiChStimProb,good_channels);
-plotTrial(stim_ts_arr,stim_ch_arr)
-xline(0:0.5:nTRIALS);
+nTRIALS = 30;
+[stim_ts_arr,stim_ch_arr,trial_id_arr] = generateStimTimes(stimRate,minISI,nTRIALS,multiChStimProb,good_channels);
+% plotTrial(stim_ts_arr,stim_ch_arr)
+% xline(0:0.5:nTRIALS);
+groupedArr = groupStimByTrial(stim_ch_arr,stim_ts_arr,trial_id_arr);
 
 %% Experiment 3 - 60 stim trials (1 min duration) with different "sparsitites" parametrized by exp mu
 stimRate1 = 50;
@@ -40,6 +43,14 @@ nTRIALS = 10;
 [stim_ts_arr1,stim_ch_arr1,trial_id_arr1] = generateStimTimes(stimRate1,minISI,nTRIALS,multiChStimProb,good_channels);
 [stim_ts_arr2,stim_ch_arr2,trial_id_arr2] = generateStimTimes(stimRate2,minISI,nTRIALS,multiChStimProb,good_channels);
 [stim_ts_arr3,stim_ch_arr3,trial_id_arr3] = generateStimTimes(stimRate3,minISI,nTRIALS,multiChStimProb,good_channels);
+groupedArr1 = groupStimByTrial(stim_ts_arr1,stim_ch_arr1,trial_id_arr1);
+groupedArr2 = groupStimByTrial(stim_ts_arr2,stim_ch_arr2,trial_id_arr2);
+groupedArr3 = groupStimByTrial(stim_ts_arr3,stim_ch_arr3,trial_id_arr3);
+
+allGroupedArr = [groupedArr1; groupedArr2; groupedArr3];
+[m,n] = size(allGroupedArr);
+idx = randperm(m);
+allGroupedArr = allGroupedArr(idx,:);
 
 for i = 1:3
 subplot(3,1,i)
@@ -52,9 +63,13 @@ elseif i == 3
 end
 xline(0:0.5:nTRIALS);
 end
-
+%%
 % shuffled
-
+stim_ch_arr = {allGroupedArr{:,2}};
+stim_ch_arr = vertcat(stim_ch_arr{:});
+stim_ts_arr = cell2mat(allGroupedArr(:,1));
+plotTrial(stim_ts_arr,stim_ch_arr)
+xline(0:0.5:30);
 
 %%
 load('columnNamesAll.mat','columnNames');
@@ -151,7 +166,19 @@ for trial = 1:nTRIALS
     stim_ts_arr = [stim_ts_arr; stim_ts];
     trial_id_arr = [trial_id_arr; trial_id];
 end
+end
 
+function groupedArr = groupStimByTrial(stim_ch_arr,stim_ts_arr,trial_id_arr)
+
+    uniqueTrialID = unique(trial_id_arr);
+    nTRIALS = numel(uniqueTrialID);
+    groupedArr = cell(nTRIALS,2);
+    for i = 1:nTRIALS
+        trialID = uniqueTrialID(i);
+        idx = find(trial_id_arr == trialID);
+        groupedArr{i,1} = stim_ch_arr(idx);
+        groupedArr{i,2} = stim_ts_arr(idx);
+    end
 end
 
 function [stim_ts,stim_ch] = generateStimTimesGamma(stimRate,scaleParam,minISI,trialLength,multiChStimProb)
